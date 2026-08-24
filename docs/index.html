@@ -3,29 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>diffnoun 1.00</title>
+  <title>diffnoun  · 1.00</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="wrap brand">
-      <img src="logo.svg" alt="diffnoun mark">
-      <div>
-        <h1>diffnoun</h1>
-        <p class="tag">Nouns from unified diffs · version 1.00</p>
+  <nav class="nav sans">
+    <a class="brand-lockup" href="index.html"><img src="logo.svg" alt=""> diffnoun</a>
+    <div class="links">
+      <a href="index.html#overview">Overview</a>
+      <a href="index.html#install">Install</a>
+      <a href="usage.html">Usage</a>
+      <a href="index.html#examples">Examples</a>
+    </div>
+  </nav>
+  
+  <header class="hero">
+    <img src="logo.svg" alt="diffnoun mark">
+    <div>
+      <p class="kicker sans">theworker02 · version 1.00</p>
+      <h1>diffnoun</h1>
+      <p class="lede">Read a unified diff and print add FILE / remove FILE / change FILE from ---, +++, and @@ headers.</p>
+      <div class="badges sans">
+        <span class="badge">1.00 / 1.0.0</span>
+        <span class="badge">branch main</span>
+        <span class="badge">MIT</span>
+        <span class="badge">Node.js >= 18</span>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <section class="card">
-      <h2>Purpose</h2>
-      <p>Read a unified diff from stdin or a file and print add, remove, and change lines from +++ / --- / @@ headers.</p>
-      <h2>Install</h2>
-      <pre><code>npm install -g diffnoun</code></pre>
-      <h2>Usage</h2>
-      <pre><code>diffnoun patch.diff</code></pre>
+  <div class="wrap">
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>Reviewing a patch as raw hunks is slow. diffnoun reduces a unified diff to the nouns: which paths appeared, disappeared, or changed.</p>
+      <p>Reviewers, changelog authors, and CI jobs that need a file-level summary of a patch without running git.</p>
     </section>
-    <footer>MIT © 2026 theworker02 · version 1.00 (1.0.0) · navy #0B1F33 · gold #C9A227</footer>
-  </main>
+    <section id="install">
+      <h2>Install</h2>
+      <p>Install globally from Git, or run with Node from a clone. There are no extra dependencies.</p>
+      <pre><code>npm install -g git+https://github.com/theworker02/diffnoun.git
+diffnoun --help
+node src/cli.js --help</code></pre>
+    </section>
+    <section id="usage">
+      <h2>Usage</h2>
+      <p>Synopsis: <code>diffnoun [options] [file]</code></p>
+      <p>See the <a href="usage.html">full CLI reference</a> for every flag, exit code, and example.</p>
+      <pre><code>diffnoun 1.00 (1.0.0)
+
+Usage:
+  diffnoun [options] [file]
+  git diff | diffnoun
+
+Summarize a unified diff as:
+  add FILE
+  remove FILE
+  change FILE
+
+A file is emitted only after a --- line, a +++ line, and an @@ hunk header.
+
+Options:
+  -h, --help       Show this help
+  -v, --version    Print 1.0.0
+
+Arguments:
+  file             Patch file to read. Omit to read stdin.
+
+Examples:
+  diffnoun patch.diff
+  git diff main | diffnoun</code></pre>
+    </section>
+    <section id="examples">
+      <h2>Examples</h2>
+      <div class="grid-2">
+        <div>
+          <h3 class="ok">Success</h3>
+          <p>A patch that adds, removes, and changes files.</p><pre><code>diffnoun changes.diff</code></pre><pre><code>add new.js
+remove gone.js
+change keep.js</code></pre>
+        </div>
+        <div>
+          <h3 class="fail">Failure</h3>
+          <p>Missing file path that does not exist.</p><pre><code>diffnoun ./no-such.diff</code></pre><p>stderr reports the Node fs error and the process exits 1.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="sans">
+    MIT © 2026 theworker02 · version <strong>1.00</strong> (<code>1.0.0</code>) ·
+    navy <code>#0B1F33</code> · gold <code>#C9A227</code> ·
+    <a href="https://github.com/theworker02/diffnoun">GitHub</a> ·
+    <a href="https://thanks.dev/u/gh/theworker02">thanks.dev</a>
+  </footer>
 </body>
 </html>

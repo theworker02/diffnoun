@@ -1,7 +1,7 @@
 {
   "name": "diffnoun",
   "version": "1.0.0",
-  "description": "Name added, removed, and changed files from a unified diff.",
+  "description": "Read a unified diff and print add FILE / remove FILE / change FILE from ---, +++, and @@ headers.",
   "bin": {
     "diffnoun": "./src/cli.js"
   },
@@ -12,5 +12,26 @@
   "license": "MIT",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theworker02/diffnoun.git"
+  },
+  "homepage": "https://theworker02.github.io/diffnoun/",
+  "bugs": {
+    "url": "https://github.com/theworker02/diffnoun/issues"
+  },
+  "files": [
+    "src",
+    "docs",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "diff",
+    "unified",
+    "git",
+    "patch",
+    "cli"
+  ]
 }
