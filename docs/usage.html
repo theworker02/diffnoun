@@ -30,29 +30,63 @@
   <div class="wrap">
     <section>
       <h2>Synopsis</h2>
-      <pre><code>diffnoun [options] [file]</code></pre>
-      <div class="callout sans"><strong>Tip:</strong> <code>diffnoun --help</code> prints this text in the terminal. <code>diffnoun --version</code> prints <code>1.0.0</code>.</div>
+      <pre><code>diffnoun 1.00 (1.0.0)
+
+Usage:
+  diffnoun [options] [file|-]
+  git diff | diffnoun
+  git diff main | diffnoun --stat --json
+
+Summarize a unified diff as noun phrases:
+  add FILE
+  remove FILE
+  change FILE
+
+A file is emitted only after a --- line, a +++ line, and an @@ hunk header.
+
+Options:
+  -h, --help         Show this help and exit 0
+  -V, -v, --version  Print 1.0.0 and exit 0
+  --json             {"entries":[{"kind","file"}],"stats":{...}}
+  --stat             Append counts: add / remove / change / files
+  --add              Only print additions
+  --remove           Only print removals
+  --change           Only print changes
+
+Arguments:
+  file               Patch file to read. Omit or pass "-" to read stdin.
+
+Exit codes:
+  0  parsed successfully (including empty diffs)
+  1  unreadable file or unknown option
+
+Examples:
+  diffnoun patch.diff
+  git diff main | diffnoun --stat
+  diffnoun --json --add patch.diff</code></pre>
+      <div class="callout sans"><strong>Tip:</strong> <code>diffnoun --help</code> and <code>-h</code> print this text. <code>diffnoun --version</code> and <code>-V</code> print <code>1.0.0</code>.</div>
     </section>
     <section>
       <h2>Flags and arguments</h2>
-      <table class="sans"><thead><tr><th>Flag / argument</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-h, --help</code></td><td>Print detailed usage and exit 0.</td></tr><tr><td><code>-v, --version</code></td><td>Print 1.0.0 and exit 0.</td></tr><tr><td><code>[file]</code></td><td>Read this patch file. If omitted, read stdin.</td></tr></tbody></table>
+      <p>The complete flag list is in <code>diffnoun --help</code> (shown above). Human output is the default; pass <code>--json</code> where supported.</p>
     </section>
     <section>
       <h2>Exit codes</h2>
-      <table class="sans"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td>Diff parsed. Zero or more summary lines printed.</td></tr><tr><td><code>1</code></td><td>The named file could not be read.</td></tr></tbody></table>
+      <table class="sans"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>0</code></td><td>Parsed successfully (including empty diffs).</td></tr><tr><td><code>1</code></td><td>Unreadable file or unknown option.</td></tr></tbody></table>
     </section>
     <section>
       <h2>Configuration</h2>
-      <p>No configuration. Classification: --- /dev/null plus a path is add; +++ /dev/null is remove; otherwise change. A hunk header @@ is required before a line is emitted. a/ and b/ prefixes are stripped.</p>
+      <p>No configuration file. Omit the path (or pass `-`) to read stdin.</p>
     </section>
     <section id="examples">
       <h2>Worked examples</h2>
       <h3 class="ok">Success path</h3>
-      <p>A patch that adds, removes, and changes files.</p><pre><code>diffnoun changes.diff</code></pre><pre><code>add new.js
+      <p>Summarize a unified diff as add/remove/change.</p><pre><code>git diff main | diffnoun --stat</code></pre><pre><code>add new.js
 remove gone.js
-change keep.js</code></pre>
+change keep.js
+stat  1 add, 1 remove, 1 change, 3 files</code></pre>
       <h3 class="fail">Failure path</h3>
-      <p>Missing file path that does not exist.</p><pre><code>diffnoun ./no-such.diff</code></pre><p>stderr reports the Node fs error and the process exits 1.</p>
+      <p>A missing patch file exits 1.</p><pre><code>diffnoun missing.diff</code></pre><pre><code>file not found: missing.diff</code></pre><p>Exit code is 1.</p>
     </section>
   </div>
   <footer class="sans">

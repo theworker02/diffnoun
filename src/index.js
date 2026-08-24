@@ -5,12 +5,12 @@ function stripPath(raw) {
 }
 
 function classify(minus, plus) {
-  if (minus == null && plus) return `add ${plus}`;
-  if (plus == null && minus) return `remove ${minus}`;
-  return `change ${plus || minus}`;
+  if (minus == null && plus) return { kind: "add", file: plus };
+  if (plus == null && minus) return { kind: "remove", file: minus };
+  return { kind: "change", file: plus || minus };
 }
 
-function parseDiff(text) {
+function parseDiffEntries(text) {
   const lines = String(text).split(/\r?\n/);
   const out = [];
   let minus = null;
@@ -37,4 +37,30 @@ function parseDiff(text) {
   return out;
 }
 
-module.exports = { parseDiff, stripPath, classify };
+function parseDiff(text) {
+  return parseDiffEntries(text).map((entry) => `${entry.kind} ${entry.file}`);
+}
+
+function statsFrom(entries) {
+  const stats = { add: 0, remove: 0, change: 0, files: entries.length };
+  for (const entry of entries) stats[entry.kind] += 1;
+  return stats;
+}
+
+function formatHuman(entries, { stat = false } = {}) {
+  const lines = entries.map((entry) => `${entry.kind} ${entry.file}`);
+  if (stat) {
+    const stats = statsFrom(entries);
+    lines.push(`stat  ${stats.add} add, ${stats.remove} remove, ${stats.change} change, ${stats.files} files`);
+  }
+  return lines.length ? `${lines.join("\n")}\n` : "";
+}
+
+module.exports = {
+  stripPath,
+  classify,
+  parseDiff,
+  parseDiffEntries,
+  statsFrom,
+  formatHuman,
+};

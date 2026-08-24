@@ -42,9 +42,40 @@
     <section id="install">
       <h2>Install</h2>
       <p>Install globally from Git, or run with Node from a clone. There are no extra dependencies.</p>
-      <pre><code>npm install -g git+https://github.com/theworker02/diffnoun.git
-diffnoun --help
-node src/cli.js --help</code></pre>
+      <pre><code>diffnoun 1.00 (1.0.0)
+
+Usage:
+  diffnoun [options] [file|-]
+  git diff | diffnoun
+  git diff main | diffnoun --stat --json
+
+Summarize a unified diff as noun phrases:
+  add FILE
+  remove FILE
+  change FILE
+
+A file is emitted only after a --- line, a +++ line, and an @@ hunk header.
+
+Options:
+  -h, --help         Show this help and exit 0
+  -V, -v, --version  Print 1.0.0 and exit 0
+  --json             {"entries":[{"kind","file"}],"stats":{...}}
+  --stat             Append counts: add / remove / change / files
+  --add              Only print additions
+  --remove           Only print removals
+  --change           Only print changes
+
+Arguments:
+  file               Patch file to read. Omit or pass "-" to read stdin.
+
+Exit codes:
+  0  parsed successfully (including empty diffs)
+  1  unreadable file or unknown option
+
+Examples:
+  diffnoun patch.diff
+  git diff main | diffnoun --stat
+  diffnoun --json --add patch.diff</code></pre>
     </section>
     <section id="usage">
       <h2>Usage</h2>
@@ -79,13 +110,14 @@ Examples:
       <div class="grid-2">
         <div>
           <h3 class="ok">Success</h3>
-          <p>A patch that adds, removes, and changes files.</p><pre><code>diffnoun changes.diff</code></pre><pre><code>add new.js
+          <p>Summarize a unified diff as add/remove/change.</p><pre><code>git diff main | diffnoun --stat</code></pre><pre><code>add new.js
 remove gone.js
-change keep.js</code></pre>
+change keep.js
+stat  1 add, 1 remove, 1 change, 3 files</code></pre>
         </div>
         <div>
           <h3 class="fail">Failure</h3>
-          <p>Missing file path that does not exist.</p><pre><code>diffnoun ./no-such.diff</code></pre><p>stderr reports the Node fs error and the process exits 1.</p>
+          <p>A missing patch file exits 1.</p><pre><code>diffnoun missing.diff</code></pre><pre><code>file not found: missing.diff</code></pre><p>Exit code is 1.</p>
         </div>
       </div>
     </section>

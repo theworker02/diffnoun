@@ -56,23 +56,50 @@ git diff | diffnoun
 
 ## CLI reference
 
-Synopsis:
-
 ```text
-diffnoun [options] [file]
-```
+diffnoun 1.00 (1.0.0)
 
-| Flag / argument | Meaning |
-| --- | --- |
-| `-h, --help` | Print detailed usage and exit 0. |
-| `-v, --version` | Print 1.0.0 and exit 0. |
-| `[file]` | Read this patch file. If omitted, read stdin. |
+Usage:
+  diffnoun [options] [file|-]
+  git diff | diffnoun
+  git diff main | diffnoun --stat --json
+
+Summarize a unified diff as noun phrases:
+  add FILE
+  remove FILE
+  change FILE
+
+A file is emitted only after a --- line, a +++ line, and an @@ hunk header.
+
+Options:
+  -h, --help         Show this help and exit 0
+  -V, -v, --version  Print 1.0.0 and exit 0
+  --json             {"entries":[{"kind","file"}],"stats":{...}}
+  --stat             Append counts: add / remove / change / files
+  --add              Only print additions
+  --remove           Only print removals
+  --change           Only print changes
+
+Arguments:
+  file               Patch file to read. Omit or pass "-" to read stdin.
+
+Exit codes:
+  0  parsed successfully (including empty diffs)
+  1  unreadable file or unknown option
+
+Examples:
+  diffnoun patch.diff
+  git diff main | diffnoun --stat
+  diffnoun --json --add patch.diff
+```
 
 Print the same text locally:
 
 ```bash
 diffnoun --help
+diffnoun -h
 diffnoun --version
+diffnoun -V
 ```
 
 Expected version output:
@@ -83,40 +110,45 @@ Expected version output:
 
 ## Configuration
 
-No configuration. Classification: --- /dev/null plus a path is add; +++ /dev/null is remove; otherwise change. A hunk header @@ is required before a line is emitted. a/ and b/ prefixes are stripped.
+No configuration file. Omit the path (or pass `-`) to read stdin.
 
 ## Exit codes
 
 | Code | Meaning |
 | --- | --- |
-| `0` | Diff parsed. Zero or more summary lines printed. |
-| `1` | The named file could not be read. |
+| `0` | Parsed successfully (including empty diffs). |
+| `1` | Unreadable file or unknown option. |
 
 ## Examples
 
 ### Success path
 
-A patch that adds, removes, and changes files.
+Summarize a unified diff as add/remove/change.
 
 ```bash
-diffnoun changes.diff
+git diff main | diffnoun --stat
 ```
 
 ```text
 add new.js
 remove gone.js
 change keep.js
+stat  1 add, 1 remove, 1 change, 3 files
 ```
 
 ### Failure path
 
-Missing file path that does not exist.
+A missing patch file exits 1.
 
 ```bash
-diffnoun ./no-such.diff
+diffnoun missing.diff
 ```
 
-stderr reports the Node fs error and the process exits 1.
+```text
+file not found: missing.diff
+```
+
+Exit code is 1.
 
 ## How to run tests
 
