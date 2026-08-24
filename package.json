@@ -1,6 +1,6 @@
 {
   "name": "diffnoun",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Name added, removed, and changed files from a unified diff.",
   "bin": {
     "diffnoun": "./src/cli.js"
