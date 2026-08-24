@@ -1,6 +1,6 @@
 # diffnoun
 
-<img src="docs/logo.svg" alt="diffnoun mark" width="88" height="88">
+<img src="docs/logo.svg" alt="diffnoun mark" width="96" height="96">
 
 **Read a unified diff and print add FILE / remove FILE / change FILE from ---, +++, and @@ headers.**
 
@@ -11,6 +11,8 @@
 ![release 1.00](https://img.shields.io/github/v/release/theworker02/diffnoun?display_name=release)
 
 Package version **1.00** (`1.0.0`). Default branch is **`main`** — never `master`.
+
+**Docs:** [GitHub Pages](https://theworker02.github.io/diffnoun/) · **Source:** [`theworker02/diffnoun`](https://github.com/theworker02/diffnoun) · **Release 1.00:** [`v1.0.0`](https://github.com/theworker02/diffnoun/releases/tag/v1.0.0)
 
 ## Why it exists
 
