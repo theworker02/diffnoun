@@ -1,40 +1,16 @@
 {
-  "name": "@magnexis/diffnoun",
-  "version": "1.0.0",
-  "description": "Read a unified diff and print add FILE / remove FILE / change FILE from ---, +++, and @@ headers.",
-  "bin": {
-    "diffnoun": "src/cli.js"
-  },
+  "name": "@theworker02/diffnoun",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Summarize unified diffs as add/remove/change file records.",
+  "bin": { "diffnoun": "src/cli.js" },
   "main": "./src/index.js",
-  "scripts": {
-    "test": "node --test"
-  },
+  "scripts": { "test": "node --test" },
   "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/theworker02/diffnoun.git"
-  },
+  "engines": { "node": ">=18" },
+  "repository": { "type": "git", "url": "https://github.com/theworker02/diffnoun.git" },
   "homepage": "https://theworker02.github.io/diffnoun/",
-  "bugs": {
-    "url": "https://github.com/theworker02/diffnoun/issues"
-  },
-  "files": [
-    "src",
-    "docs",
-    "LICENSE",
-    "README.md"
-  ],
-  "keywords": [
-    "diff",
-    "unified",
-    "git",
-    "patch",
-    "cli"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+  "bugs": { "url": "https://github.com/theworker02/diffnoun/issues" },
+  "files": ["src", "docs", "LICENSE", "README.md"],
+  "keywords": ["diff", "unified", "git", "patch", "summary", "jsr"]
 }
