@@ -16,7 +16,7 @@ This project is **proprietary**. Production use, redistribution, and commercial 
 ![version 1.1.0](https://img.shields.io/badge/version-1.1.0-C9A227?labelColor=0B1F33)
 ![license MIT](https://img.shields.io/badge/license-MIT-0B1F33)
 
-**Package:** [`@theworker02/diffnoun`](https://jsr.io/@theworker02/diffnoun) Â· **Site:** [GitHub Pages](https://theworker02.github.io/diffnoun/) Â· **Source:** [`theworker02/diffnoun`](https://github.com/theworker02/diffnoun)
+**Package:** [`@theworker02/diffnoun`](https://jsr.io/@theworker02/diffnoun) Ã‚Â· **Site:** [GitHub Pages](https://theworker02.github.io/diffnoun/) Ã‚Â· **Source:** [`theworker02/diffnoun`](https://github.com/theworker02/diffnoun)
 
 ## Add from JSR
 
@@ -34,14 +34,14 @@ console.log(filterEntries(entries, ["add", "change"]));
 
 ## Public API
 
-- `parseDiffEntries(text)` â€” structured file changes.
-- `parseDiff(text)` â€” noun-phrase summary lines.
-- `classify(before, after)` â€” classify a path pair.
-- `stripPath(raw)` â€” normalize diff-header paths.
-- `statsFrom(entries)` â€” aggregate change counts.
-- `filterEntries(entries, kinds)` â€” filter by change class.
-- `formatHuman(entries, options)` â€” terminal output.
-- `DIFF_KINDS`, `PACKAGE`, `DiffKind`, `DiffEntry`, `DiffStats` â€” documented metadata and types.
+- `parseDiffEntries(text)` Ã¢â‚¬â€ structured file changes.
+- `parseDiff(text)` Ã¢â‚¬â€ noun-phrase summary lines.
+- `classify(before, after)` Ã¢â‚¬â€ classify a path pair.
+- `stripPath(raw)` Ã¢â‚¬â€ normalize diff-header paths.
+- `statsFrom(entries)` Ã¢â‚¬â€ aggregate change counts.
+- `filterEntries(entries, kinds)` Ã¢â‚¬â€ filter by change class.
+- `formatHuman(entries, options)` Ã¢â‚¬â€ terminal output.
+- `DIFF_KINDS`, `PACKAGE`, `DiffKind`, `DiffEntry`, `DiffStats` Ã¢â‚¬â€ documented metadata and types.
 
 ## CLI from source
 
@@ -63,4 +63,8 @@ The canonical public package is JSR `@theworker02/diffnoun`, published through G
 
 ## License
 
-[MIT](LICENSE) Â© 2026 theworker02
+[MIT](LICENSE) Ã‚Â© 2026 theworker02
+
+## Status
+
+diffnoun is actively packaged for commercial licensing and acquisition diligence. See [ACQUISITION.md](./ACQUISITION.md) and [docs/acquisition/](./docs/acquisition/).
